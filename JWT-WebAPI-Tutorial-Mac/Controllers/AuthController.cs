@@ -33,21 +33,36 @@ namespace JWT_WebAPI_Tutorial_Mac.Controllers
 
         public async Task<ActionResult<string>> Login(UserDTO request)
         {
-            BadRequestObjectResult badResponse = BadRequest("User Not Found");
+            BadRequestObjectResult noUserFound = BadRequest("User Not Found");
+            BadRequestObjectResult badPassword = BadRequest("Invalid Password");
             OkObjectResult goodResponse = Ok("looking good");
 
-            return (user.Username != request.Username) ? badResponse : goodResponse;
+            // add passwordHash verification
+            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                return badPassword;
+            }
+
+            return (user.Username != request.Username) ? noUserFound : goodResponse;
 
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            }
+            using var hmac = new HMACSHA512();
+            passwordSalt = hmac.Key;
+            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
+        }
+
+        private bool VerifyPasswordHash(string password, byte[]? passwordHash, byte[]? passwordSalt)
+        {
+
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash); // returns true if the sequence is equal
+            }
         }
 
 
