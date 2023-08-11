@@ -43,7 +43,7 @@ namespace JWT_WebAPI_Tutorial_Mac.Controllers
 
         [HttpPost("login")]
 
-        public async Task<ActionResult<string>> Login(UserDTO request)
+        public ActionResult<string> Login(UserDTO request)
         {
             BadRequestObjectResult noUserFound = BadRequest("User Not Found");
             BadRequestObjectResult badPassword = BadRequest("Invalid Password");
@@ -55,7 +55,8 @@ namespace JWT_WebAPI_Tutorial_Mac.Controllers
                 return badPassword;
             }
 
-            if (user.Username != request.Username) {
+            if (user.Username != request.Username)
+            {
                 return noUserFound;
             }
 
@@ -103,7 +104,7 @@ namespace JWT_WebAPI_Tutorial_Mac.Controllers
         private static bool VerifyPasswordHash(string password, byte[]? passwordHash, byte[]? passwordSalt)
         {
 
-            using (var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(key: passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash); // returns true if the sequence is equal
