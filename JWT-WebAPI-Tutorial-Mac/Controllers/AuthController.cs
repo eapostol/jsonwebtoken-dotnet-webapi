@@ -43,8 +43,23 @@ namespace JWT_WebAPI_Tutorial_Mac.Controllers
                 return badPassword;
             }
 
-            return (user.Username != request.Username) ? noUserFound : goodResponse;
+            if (user.Username != request.Username) {
+                return noUserFound;
+            }
 
+
+            // create the token
+            string token = CreateToken(user);
+
+            return goodResponse;
+
+        }
+
+        private string CreateToken(User user)
+        {
+            return string.Empty;
+
+            // throw new NotImplementedException();
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
