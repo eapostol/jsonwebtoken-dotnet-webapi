@@ -9,6 +9,22 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="IdentityModel" Version="6.1.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.32.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Abstractions" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.3.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Xml" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens.Saml" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Validators" Version="6.32.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocol.Extensions" Version="1.0.4.403061554" />
+    <PackageReference Include="Microsoft.IdentityModel" Version="7.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.WsTrust" Version="6.8.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.SignedHttpRequest" Version="6.32.1" />
   </ItemGroup>
 
 </Project>
